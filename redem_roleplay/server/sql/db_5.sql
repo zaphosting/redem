@@ -1,4 +1,3 @@
-USE `redemrp`;
 
 CREATE TABLE `web_permissions` (
 	`username` VARCHAR(50) NULL DEFAULT NULL,

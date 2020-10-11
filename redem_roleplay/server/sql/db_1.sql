@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS `redemrp`;
-CREATE DATABASE IF NOT EXISTS `redemrp`;
-USE `redemrp`;
-
 CREATE TABLE IF NOT EXISTS `version` (
   `id` int(11) NOT NULL,
   `current` varchar(3) COLLATE utf8mb4_bin DEFAULT 'no',
