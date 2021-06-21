@@ -8,7 +8,9 @@ if not -> [RedEM](https://github.com/kanersps/redem) --> [RedEM:RP](https://gith
 - Clone redemrp_menu_base into [redemrp] folder
 - add ```ensure redemrp_menu_base``` after ```ensure redem_roleplay```
 
-![alt text](https://i.imgur.com/h7CIxyM.png)
+![alt text](https://i.imgur.com/713zDs6.png)
+
+![alt text](https://i.imgur.com/Uk0Ls4w.png)
 
 ## 2.Usage
 Add this on top your client side file
@@ -24,6 +26,7 @@ Example:
         local elements = {
  
                 {label = "Test Option", value = 'test' , desc = "Press if you want print text"},
+                {label = "Hop Test", value = 0  ,desc = "Look its so fast" , type = "slider" , min =0 , max =100, hop= 5},
         }
  
        MenuData.Open(

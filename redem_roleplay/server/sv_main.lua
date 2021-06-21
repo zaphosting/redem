@@ -87,7 +87,7 @@ AddEventHandler('playerDropped', function()
 
 	if(Users[Source])then
 		TriggerEvent("redemrp:playerDropped", Users[Source])
-		TriggerEvent("redemrp_db:updateUser", Users[Source].getIdentifier(), tonumber(Users[Source].getSessionVar("charid")), {money = Users[Source].getMoney(), gold = Users[Source].getGold(), xp = tonumber(Users[Source].getXP()), level = tonumber(Users[Source].getLevel())}, function()
+		TriggerEvent("redemrp_db:updateUser", Users[Source].getIdentifier(), tonumber(Users[Source].getSessionVar("charid")), {money = Users[Source].getMoney(), gold = Users[Source].getGold(), xp = tonumber(Users[Source].getXP()), level = tonumber(Users[Source].getLevel()) , job = Users[Source].getJob(), jobgrade = tonumber(Users[Source].getJobgrade())}, function()
 		Users[Source] = nil
 		end)
 	end
@@ -200,6 +200,18 @@ AddEventHandler('redemrp_db:updateUser', function(identifier, charid, new, callb
 			end
 		end)
 	end)
+end)
+
+AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
+    if eventData.secondsRemaining == 60 then
+        CreateThread(function()
+            Wait(45000)
+            print("15 seconds before restart... saving all players!")
+		for k,v in pairs(Users)do
+			DropPlayer(tonumber(k), "A scheduled server restart is in progress")
+		end
+        end)
+    end
 end)
 
 function tLength(t)
