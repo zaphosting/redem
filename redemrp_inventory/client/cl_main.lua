@@ -150,10 +150,9 @@ AddEventHandler("redemrp_inventory:SaveAmmo", function()
         end
 end)
 RegisterNetEvent("redemrp_inventory:SendItems")
-AddEventHandler("redemrp_inventory:SendItems", function(data, data2, money, weight , other , target)
+AddEventHandler("redemrp_inventory:SendItems", function(data, data2, weight , other , target)
     InventoryItems  = data
     OtherItems  = data2
-    PlayerMoney = money
     InventoryWeight = weight
     local _target = 0
     local crafting = true
@@ -189,6 +188,16 @@ AddEventHandler("redemrp_inventory:SendItems", function(data, data2, money, weig
         })
         SetNuiFocus(true, true)
     end
+end)
+
+RegisterNetEvent("redem:addMoney")
+AddEventHandler("redem:addMoney", function(_money)
+    PlayerMoney = _money
+end)
+
+RegisterNetEvent("redem:activateMoney")
+AddEventHandler("redem:activateMoney", function(_money)
+    PlayerMoney = _money
 end)
 
 RegisterNUICallback('additem', function(data)
@@ -365,6 +374,12 @@ AddEventHandler('redemrp_inventory:OpenPrivateLocker', function()
      TriggerServerEvent("redemrp_inventory:GetLocker", LockerZone)
 end)
 
+RegisterNetEvent('redemrp_inventory:OpenLocker')
+AddEventHandler('redemrp_inventory:OpenLocker', function(id)
+    LockerZone = id
+    TriggerServerEvent("redemrp_inventory:GetLocker", LockerZone)
+end)
+
 --==================== D R O P =======================================
 
 
@@ -406,6 +421,7 @@ Citizen.CreateThread(function()
         if CreatedLockers ~= nil then
 
             for k,v in pairs(CreatedLockers) do
+              if v.coords.x ~= "empty" and v.coords ~= nil then
                 local distance = Vdist(coords, v.coords.x, v.coords.y, v.coords.z)
 
                 if distance <= 15.0 then
@@ -440,7 +456,7 @@ Citizen.CreateThread(function()
                     end
                 end
             end
-
+           end
         end
 
         if can_wait == true then
